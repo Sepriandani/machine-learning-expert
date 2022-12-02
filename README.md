@@ -164,7 +164,7 @@ Pada tahap ini, kita akan mengembangkan model machine learning dengan tiga algor
 2. K-Nearest Neighbours
 3. Random Forest
 
-##### **Support Vector Regression**
+#### **Support Vector Regression**
 _Support Vector Regression_ (SVR) menggunakan prinsip yang sama dengan SVM pada kasus klasifikasi. Perbedaannya adalah jika pada kasus klasifikasi, SVM berusaha mencari ‘jalan’ terbesar yang bisa memisahkan sampel-sampel dari kelas berbeda, maka pada kasus regresi SVR berusaha mencari jalan yang dapat menampung sebanyak mungkin sampel di ‘jalan’. Pada pembuatan model ini dilakukan dengan menggunakan modul yang tersedia di library scikit-learn dengan menggunakan beberapa parameter sebagai berikut:
 
 * `kernel` = rbf. Parameter ini merupakan metode yang digunakan untuk mengambil data sebagai input dan mengubahnya menjadi bentuk pemrosesan data yang diperlukan.
@@ -182,7 +182,7 @@ Berikut keunggulan Support Vector Machine:
 Berikut kelemahan Support Vector Machine:
 * Sulit dipakai dalam problem berskala besar. Skala besar dalam hal ini dimaksudkan dengan jumlah sample yang diolah.
 
-##### **K-Nearest Neighbours**
+#### **K-Nearest Neighbours**
 K-nearest neighbor adalah salah satu algoritma machine learning dengan pendekatan supervised learning yang bekerja dengan mengkelaskan data baru menggunakan kemiripan antara data baru dengan sejumlah data (k) pada lokasi yang terdekat yang telah tersedia. Algoritma ini menerapkan lazy learning” atau “instant based learning” dan merupakan algoritma non parametrik. Algoritma KNN digunakan untuk klasifikasi dan regresi. Pada pembuatan model ini akan menggunaka modul KNN yang terlah di sediakan oleh library _scikit-learn_ .Pada model ini hanya akan menggunakan 1 parameter yaitu `n_neighbours` (Jumlah tetangga). Jumlah _neighbours_ yang di gunakan yaitu sejumlah 5 neighbours. Kemudian, untuk menentukan titik mana dalam data yang paling mirip dengan input baru, KNN menggunakan perhitungan ukuran jarak. Metrik ukuran jarak yang digunakan secara default pada library sklearn adalah Minkowski distance. Setelah menentukan nilai-nilai pada parameter model melakukan pelatihan menggunakan data latih setelah itu model akan melakukan prediksi terhadap data yang belum pernah dilihat dengan menggunakan data uji. Namun algoritma ini memiliki keunggulan dan kekurangan.
 
 Berikut keunggulan K-Nearest Neighbours:
@@ -199,7 +199,7 @@ Berikut kelemahan K-Nearest Neighbours:
 * Tidak cukup bagus jika diterapkan pada high dimensional data
 * Sangat sensitif pada data yang memiliki banyak noise (noisy data), banyak data yang hilang (missing data), dan pencilan (outliers).
 
-##### **Random Forest**
+#### **Random Forest**
 Algoritma ini merupakan sekumpulan algoritma decision tree. Konsep dasar decision tree adalah mengubah data menjadi aturan-aturan keputusan. Kombinasi dari masing–masing decision tree yang baik kemudian dikombinasikan ke dalam satu model. Random Forest bergantung pada sebuah nilai vector random dengan distribusi yang sama pada semua pohon yang masing masing decision tree memiliki kedalaman yang maksimal. Algoritma ini bisa menyelesaikan permasalahan klasifikasi dan regresi. Pada kasus klasifikasi, prediksi akhir diambil dari prediksi terbanyak pada seluruh pohon. Sedangkan, pada kasus regresi, prediksi akhir adalah rata-rata prediksi seluruh pohon. Untuk pembuatan model Random Forest, akan menggunakan beberapa parameter, antara lain:
 * `n_estimator`: jumlah trees (pohon) di forest. Di sini kita set `n_estimator`=50.
 * `max_depth`: kedalaman atau panjang pohon. Ia merupakan ukuran seberapa banyak pohon dapat membelah (splitting) untuk membagi setiap node ke dalam jumlah pengamatan yang diinginkan.
@@ -233,6 +233,8 @@ ypred = Nilai prediksi
 
 Setelah melakukan scaling pada data uji kita evaluasi ketiga model kita dengan metrik MSE. hasil evaluasi yang didapatkan adalah sebagai berikut
 
+Tabel 3. Hasil evaluasi model dengan metrik MSE
+
 |         |  **train**  |   **test**   |
 |--------:|:-----------:|:------------:|
 | **SVR** | 8329.656534 |  7033.950142 |
@@ -258,9 +260,9 @@ Gambar 6. Bar Chart hasil prediksi model
 Dapat juga dilihat melalui visualisasi Gambar 6 bahwa angka prediksi pada model SVR yang paling mendekati dengan angka sebenarnya.
 
 ## Kesimpulan
-1. Pada proyek ini model _Support Vector Regression (SVR)_ yang memiliki tingkat error paling rendah
+1. Pada proyek ini, model _Support Vector Regression (SVR)_ yang memiliki tingkat error paling rendah
 2. Setelah dilakukannya Data Understanding diketahui bahwa fitur Close merupakan target utama untuk memprediksi harga Bitcoin
-3. Dataset yang digunakan tidak memiliki missing value tetapi, banyak terdapat outlier pada dataset 
+3. Dataset yang digunakan tidak memiliki missing value tetapi banyak terdapat outlier pada dataset 
 
 ## Referensi
 [1] S. A. Basher dan P. Sadorsky, “Forecasting Bitcoin price direction with random forests: How important are interest rates, inflation, and market volatility?,” Mach. Learn. Appl., vol. 9, hlm. 100355, Sep 2022, doi: 10.1016/j.mlwa.2022.100355.
