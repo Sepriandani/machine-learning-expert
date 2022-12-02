@@ -14,10 +14,6 @@ Penerapan machine learning membantu dalam proses analisis data besar dan komplek
 
 Berdasarkan hal tersebut, maka dilakukan penelitian tentang prediksi harga Bitcoin menggunakan machine learning. Proyek machine learning ini di buat agar dapat memprediksi harga pasar Bitcoin di masa mendatang. Dengan penerapan machine learning di harapkan dapat mengurangi tingkat kerugian investor akibat harga mata uang Bitcoin yang tidak stabil.
 
-Referensi :
-* https://medium.com/analytics-vidhya/predict-bitcoin-price-using-machine-learning-model-288f111eb452
-* https://miuc.org/building-a-predictive-model-for-cryptocurrencies-investment/
-
 ## Business Understanding
 
 ### Problem Statement
@@ -76,9 +72,20 @@ Setelah dilakukan analisa pada data, didapatkan informasi bahwa:
 
 Uraian di atas menunjukkan bahwa setiap kolom telah memiliki tipe data yang sesuai. Selanjutnya, kita perlu mengecek deskripsi statistik dataseat
 
-![Dataseat discribe](/image/dataseat-discribe.png)
+Tabel 1. Deskripsi statistik dataseat
 
-Berdasarkan gambar diatas memberikan informasi statistik pada masing-masing kolom, antara lain:
+|           |     **SNo** |     **High** |      **Low** |     **Open** |    **Close** |   **Volume** | **Marketcap** |
+|----------:|------------:|-------------:|-------------:|-------------:|-------------:|-------------:|--------------:|
+| **count** | 2991.000000 |  2991.000000 |  2991.000000 |  2991.000000 |  2991.000000 | 2.991000e+03 |  2.991000e+03 |
+|  **mean** | 1496.000000 |  6893.326038 |  6486.009539 |  6700.146240 |  6711.290443 | 1.090633e+10 |  1.208761e+11 |
+|  **std**  |  863.571653 | 11642.832456 | 10869.032130 | 11288.043736 | 11298.141921 | 1.888895e+10 |  2.109438e+11 |
+|  **min**  |    1.000000 |    74.561096 |    65.526001 |    68.504997 |    68.431000 | 0.000000e+00 |  7.784112e+08 |
+|  **25%**  |  748.500000 |   436.179001 |   422.879486 |   430.445496 |   430.569489 | 3.036725e+07 |  6.305579e+09 |
+|  **50%**  | 1496.000000 |  2387.610107 |  2178.500000 |  2269.889893 |  2286.409912 | 9.460360e+08 |  3.741503e+10 |
+|  **75%**  | 2243.500000 |  8733.926948 |  8289.800459 |  8569.656494 |  8576.238715 | 1.592015e+10 |  1.499957e+11 |
+|  **max**  | 2991.000000 | 64863.098908 | 62208.964366 | 63523.754869 | 63503.457930 | 3.509679e+11 |  1.186364e+12 |
+
+Berdasarkan Tabel 1 diatas memberikan informasi statistik pada masing-masing kolom, antara lain:
 * Count  adalah jumlah sampel pada data.
 * Mean adalah nilai rata-rata.
 * Std adalah standar deviasi.
@@ -91,28 +98,51 @@ Berdasarkan gambar diatas memberikan informasi statistik pada masing-masing kolo
 Sebelum melakukan pemrosesan data untuk pelatihan, perlu dilakukan analisa pada data untuk mengetahui keadaan pada data seperti korelasi antar fitur dan outlier pada data. Berikut visualisasi data yang menunjukkan korelasi atar fitur dan outlier pada data
 
 ### Menagani Missing Value
-Tahap selanjutnya kita harus mengecek apakah terdapat missing value pada dataset, karna missing value akan berperngaruh terhadap performa model namtinya
-![Missing Value](/image/missing-value.png)
-Gambar diatas menunjukan bahwa tidak terdapat missing value pada dataseat
+Tahap selanjutnya kita harus mengecek apakah terdapat missing value pada dataset, karna missing value akan berperngaruh terhadap performa model nantinya
+
+Tabel 2. Missing value pada masing-masing feature dataset
+
+| SNo       | 0 |
+|-----------|---|
+| Name      | 0 |
+| Symbol    | 0 |
+| Date      | 0 |
+| High      | 0 |
+| Low       | 0 |
+| Open      | 0 |
+| Close     | 0 |
+| Volume    | 0 |
+| Marketcap | 0 |
+
+Berdasarkan Tabel 2. Dapat diketahui bahwa tidak terdapat missing value pada dataseat
 
 ### Menangani Oulier
 Pada tahap ini kita perlu mengecek outlier pada dataseat. kita akan menggunakan teknik visualisasi, yaitu jenis boxplot.
 
+Gambar 1. Visualisasi outlier mengunakan teknik boxplot
+
 ![Outlier](/image/outlier.png)
 
-Dari hasil visualisasi diatas dapat dilihat bahwa banyak terdapat banyak outlier pada masing-masing kolom dataseat kecuali kolom SNo karna kolom tersebut hanyalah kolom nomor urut pada dataseat.
+Berdasarkan visualisasi Gambar 1, dapat dilihat bahwa banyak terdapat banyak outlier pada masing-masing kolom dataseat kecuali kolom SNo karna kolom tersebut hanyalah kolom nomor urut pada dataseat.
 Untuk mengatasi oulier tersebut kita akan mengunakan teknik IQR (Inter Quartile Range) methode yaitu dengan menghapus data yang berada diluar interquartile range. Interquartile merupakan range diantara kuartil pertama(25%) dan kuartil ketiga(75%)
 
 ### Univariate Analysis
-Karena target prediksi dari dataset ini ada pada fitur Close yang merupakan harga Bitcoin, jadi hanya fokus menganalisis korelasi data pada feature tersebut. Dari hasil visualisasi data dibawah dapat disimpulkan bahwa peningkatan harga bitcoin sebanding dengan penurunan jumlah sampel data.
+Pada tahap ini kita akan melakukan proses analisis data dengan teknik Univariate EDA. Karena target prediksi dari dataset ini ada pada fitur Close yang merupakan harga Bitcoin, jadi hanya fokus menganalisis korelasi data pada feature tersebut. Dari hasil visualisasi Gambar 2, dapat disimpulkan bahwa peningkatan harga bitcoin sebanding dengan penurunan jumlah sampel data.
+
+Gambar 2. Visualisasi histogram masing-masing fitur pada dataset
+
 ![Univariate Analysis](/image/univariate-analysis.png)
 
 ### Multivariate Analysis
-Jika di lihat dari visualisasi data dibawah. Fitur Close pada sumbu y memiliki korelasi dengan data pada fitur High, Low, Open, dan Marketcap. Korelasi yang terdapat pada data-data tersebut merupakan korelas yang tinggi, sedangkan untuk fitur Volume terlihat memiliki korelasi yang cukup lemah karena sebaran datanya tidak membentuk pola
+Pada tahap ini kita akan melakukan proses analisis data dengan teknik Multivariate EDA. Jika di lihat dari visualisasi Gambar 3. Fitur Close pada sumbu y memiliki korelasi dengan data pada fitur High, Low, Open, dan Marketcap. Korelasi yang terdapat pada data-data tersebut merupakan korelas yang tinggi, sedangkan untuk fitur Volume terlihat memiliki korelasi yang cukup lemah karena sebaran datanya tidak membentuk pola
 
-![Multivariate Analysis](/image/multivariate-analysis.png)
+Gambar 3. Visualisasi hubungan antara fitur mengunakan fungsi pairplot
 
-Untuk lebih jelasnya dapat dilihat melalui visualisasi dibawah yang menunjukkan skor korelasi di tiap fitur dengan fitur Close. Pada fitur High, Low, Open dan Marketcap memiliki skor korelasi yang terbilang tinggi yaitu 1. Sedangkan pada fitur Volume memiliki skor korelasi yang cukup rendah yaitu 0.8. Sehingga fitur Volume ini dapat didrop dari dataset.
+![Multivariate Analysis](/image/multivariate-analysis.jpeg)
+
+Untuk lebih jelasnya dapat dilihat melalui visualisasi Gambar 4, yang menunjukkan skor korelasi di tiap fitur dengan fitur Close. Pada fitur High, Low, Open dan Marketcap memiliki skor korelasi yang terbilang tinggi yaitu 1. Sedangkan pada fitur Volume memiliki skor korelasi yang cukup rendah yaitu 0.8. Sehingga fitur Volume ini dapat didrop dari dataset.
+
+Gambar 4. Correlation Matrix
 
 ![Correlation Matrix](/image/correlation-matrix.png)
     
@@ -120,13 +150,9 @@ Untuk lebih jelasnya dapat dilihat melalui visualisasi dibawah yang menunjukkan 
 Tahap ini merupakan tahapan dalam mempersiapkan data untuk keperluan pelatihan model:
 ### Seleksi Fitur
 Kolom data seperti (SNo, Name, Symbol, Date, Marketcap) tidak diperlukan untuk pelatihan, karena data tersebut akan mengganggu model dalam mempelajari data. Karena isi dari data tersebut tidak memiliki value yang berarti untuk dipelajari oleh model.
-Maka dataseat yang siap di latih yaitu sebagai berikut
-
-![Clean Dataseat](/image/clean-dataseat.png)
 
 ### Train-Test-Split
 Membagi dataset menjadi data latih (train) dan data uji (test) merupakan hal yang harus kita lakukan sebelum membuat model.Data latih adalah sekumpulan data yang akan digunakan oleh model untuk melakukan pelatihan. Sedangkan, data uji adalah sekumpulan data yang akan digunakan untuk memvalidasi kinerja pada model yang telah dilatih. Karena data uji berperan sebagai data baru yang belum pernah dilihat oleh model, maka cara ini efektif untuk memeriksa performa model setelah proses pelatihan dilakukan. Proporsi pembagian dataset pada proyek ini menggunakan proporsi pembagian 80:20 yang berarti sebanyak 80% merupakan data latih dan 20% persen merupakan data uji.
-![train test dataset](/image/train-test-dataset.png)
 
 ### Standarisasi
 Melakukan transformasi pada data fitur fitur yang akan dipelajari oleh model menggunakan library MinMaxScaler. MinMaxScaler mentransformasikan fitur dengan menskalakan setiap fitur ke rentang tertentu. Library ini menskalakan dan mentransformasikan setiap fitur secara individual sehingga berada dalam rentang yang diberikan pada set pelatihan, pada library ini memiliki range default antara 0 dan 1. Dengan merenapkan teknik normalisasi data, model akan dengan lebih mudah mengenali pola-pola yang terdapat pada data sehingga akan menghasilkan prediksi yang lebih baik daripada tidak menggunakan teknik normalisasi.
@@ -198,27 +224,48 @@ Untuk melakukan tuning hyperparameter pada proyek ini menggunakan teknik Grid se
 Pada tahap ini metrik yang akan kita gunakan adalah MSE atau Mean Squared Error yang menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi
 sebelum menghitung nilai MSE dalam model, kita perlu melakukan proses scaling fitur numerik pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama dan kita bisa melakukan evaluasi.
 
-![Rumus MSE](/image/rumus-mse.jpeg)
+$$MSE = {1 \over N} \sum_{i=1}^n(y_i-ypred_i)^2$$
 
 dimana:
-At = Nilai Aktual permintaan
-Ft = Nilai hasil prediksi
-n = banyaknya data
+N = Jumlah dataset
+yi = Nilai sebenarnya
+ypred = Nilai prediksi
 
 Setelah melakukan scaling pada data uji kita evaluasi ketiga model kita dengan metrik MSE. hasil evaluasi yang didapatkan adalah sebagai berikut
 
-![Hasil Evaluasi](/image/hasil-evaluasi.png)
+|         |  **train**  |   **test**   |
+|--------:|:-----------:|:------------:|
+| **SVR** | 8329.656534 |  7033.950142 |
+| **KNN** |  12309.9332 | 22227.046939 |
+|  **RF** | 3725.583761 | 16448.244813 |
 
 Untuk memudahkan, mari kita plot metrik tersebut dengan bar chart
 
+Gambar 5. Bar Chart evaluasi model
+
 ![Grafik Evaluasi](/image/grafik-evaluasi.png)
 
-Dapat dilihat dari visulisasi diatas bahwa MSE pada model SVR merupakan MSE yang paling rendah dari kedua model lainnya, selain itu jumlah error pada saat pengujian tidak berbeda jauh dengan error pada saat pelatihan.
+Dapat dilihat dari visulisasi Gambar 5 bahwa MSE pada model SVR merupakan MSE yang paling rendah dari kedua model lainnya, selain itu jumlah error pada saat pengujian tidak berbeda jauh dengan error pada saat pelatihan.
 
 Pada proyek ini yang menjadi model dengan solusi terbaik adalah _Support Vector Regression (SVR)_. Dimana model ini memiliki nilai error paling rendah dari kedua model lainnya dan hasil prediksinya yang paling mendekati dengan angka sebenarnya.
 
 Selajutnya kita lakukan prediksi harga Bitcoin mengunakan model yang telah dibuat, dan hasil yang didapatkan adalah sebagai berikut
 
-![Grafik Evaluasi 2](/image/grafik-prediksi.png)
+Gambar 6. Bar Chart hasil prediksi model
 
-Dapat juga dilihat melalui visualisasi diatas bahwa angka prediksi pada model SVR yang paling mendekati dengan angka sebenarnya.
+![Grafik Prediksi](/image/grafik-prediksi.png)
+
+Dapat juga dilihat melalui visualisasi Gambar 6 bahwa angka prediksi pada model SVR yang paling mendekati dengan angka sebenarnya.
+
+## Kesimpulan
+1. Pada proyek ini model _Support Vector Regression (SVR)_ yang memiliki tingkat error paling rendah
+2. Setelah dilakukannya Data Understanding diketahui bahwa fitur Close merupakan target utama untuk memprediksi harga Bitcoin
+3. Dataset yang digunakan tidak memiliki missing value tetapi, banyak terdapat outlier pada dataset 
+
+## Referensi
+[1] S. A. Basher dan P. Sadorsky, “Forecasting Bitcoin price direction with random forests: How important are interest rates, inflation, and market volatility?,” Mach. Learn. Appl., vol. 9, hlm. 100355, Sep 2022, doi: 10.1016/j.mlwa.2022.100355.
+
+[2] S. Ali Alahmari, “PREDICTING THE PRICE OF CRYPTOCURRENCY USING SUPPORT VECTOR REGRESSION METHODS,” J. Mech. Contin. Math. Sci., vol. 15, no. 4, Apr 2020, doi: 10.26782/jmcms.2020.04.00023.
+
+[3] H. Fatah dan A. Subekti, “PREDIKSI HARGA CRYPTOCURRENCY DENGAN METODE K-NEAREST NEIGHBOURS,” J. Pilar Nusa Mandiri, vol. 14, no. 2, hlm. 137, Sep 2018, doi: 10.33480/pilar.v14i2.894.
+
