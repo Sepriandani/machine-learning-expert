@@ -9,10 +9,6 @@ Salah satu upaya untuk dapat meningkatkan minat baca kepada masyarakat adalah de
 
 ## Business Understanding
 
-Pada bagian ini, Anda perlu menjelaskan proses klarifikasi masalah.
-
-Bagian laporan ini mencakup:
-
 ### Problem Statements
 
 Berdasarkan pada latar belakang di atas, permasalahan yang dapat diselesaikan pada proyek ini adalah sebagai berikut:
@@ -101,9 +97,11 @@ Tabel 1. Jumlah buku berdasarkan rating yang diberikan penguna
 |      9      |   67541 |  67541 |
 |      10     |   78610 |  78610 |
 
-Dari Tabel 1 diatas diketahui bahwa banyak penguna yang memberikan rating 0. untuk dapat memahami data lebih jelas, mari kita lihat visualisasi data mengunakan bar chart seperti pada Gambar 1
+Dari Tabel 1 diatas diketahui bahwa banyak penguna yang memberikan rating 0. untuk dapat memahami data lebih jelas, mari kita lihat visualisasi data mengunakan bar chart seperti pada *Gambar 1*
 
 *Gambar 1. Bar-chart jumlah buku berdasarkan rating yang diberikan penguna*
+
+![bar-chart-ratings](https://user-images.githubusercontent.com/79014522/205957792-19ae8e6f-984f-4b77-a017-408db2c94bdf.png)
 
 Dapat dilihat pada Gambar 1 bahwa terjadi ke tidak seimbangan pada data, jika hal ini tidak diatasi maka akan berpengaruh terhadap performa model nantinya.
 
@@ -112,7 +110,8 @@ Teknik yang digunakan dalam penyiapan data *(Data Preparation)* yaitu:
 - **Mengatasi data yang tidak seimbang** : Seperti yang telah diketahui sebelumnya bahwa jumlah rating tidak seimbang (imbalance) yang mana sebagian besar user memberikan rating 0 pada buku. Hal ini dapat mengakibatkan model memiliki kinerja yang buruk. Untuk mengatasi hal tersebut, pada proyek ini data dengan rating 0 akan dihapus *(di-drop)*. Walaupun jumlah data saat ini berkurang drastis namun distribusi data menjadi lebih seimbang seperti yang terlihat pada *Gambar 2* dan diharapkan memiliki kinerja yang lebih baik.
 
     *Gambar 2. Bar-chart distribusi data yang telah seimbang*
-
+    
+    ![bar-chart-ratings-bersih](https://user-images.githubusercontent.com/79014522/205957885-dfbb551d-d73f-4a67-82af-1860f163c0d9.png)
 
 - **Encoding** : dilakukan untuk menyandikan `User-ID` dan `ISBN` ke dalam indeks integer. Tahapan ini diperlukan karena kedua data tersebut berisi integer yang tidak berurutan (acak) dan gabungan string. Untuk itu perlu diubah ke dalam bentuk indeks.
 
@@ -170,11 +169,17 @@ Berikut ini adalah plot metrik RMSE setelah proses pelatihan model.
 
 *Gambar 3. Grafik evaluasi model*
 
+![grafik-evaluasi](https://user-images.githubusercontent.com/79014522/205958044-115f4ca3-dd28-46d7-8b12-3d409703b0f8.png)
+
 Perhatikanlah, Dari proses ini, kita memperoleh nilai error akhir sebesar sekitar 0.14 dan error pada data validasi sebesar 0.18. Nilai tersebut cukup bagus untuk sistem rekomendasi
 
 Agar dapat mengetahui apakah model ini bisa membuat rekomendasi dengan baik, maka dilakukan pungujian menggunakan data sampel user secara acak pada dataseat `Ratings.csv` dan diperoleh hasil seperti pada *Gambar 4*
 
 *Gambar 4. Hasil rekomendasi model*
+
+![hasil-rekomendasi](https://user-images.githubusercontent.com/79014522/205958584-a2a8f952-49be-4569-9339-ad3ac059728c.png)
+
+hasil di atas adalah rekomendasi untuk user dengan id 155027. Dari output tersebut, kita dapat membandingkan antara buku dengan rating tertinggi dari user dan Top 10 buku recommendation untuk user. 
 
 ## Kesimpulan
 1. Hasil evaluasi dari model yang telah dibuat diperoleh nilai error akhir sebesar sekitar 0.14 dan error pada data validasi sebesar 0.18. Nilai tersebut cukup bagus untuk sistem rekomendasi
@@ -182,7 +187,7 @@ Agar dapat mengetahui apakah model ini bisa membuat rekomendasi dengan baik, mak
 
 
 ## Referensi
-[1]. E. Uko, B. O., dan P. O., “An Improved Online Book Recommender System using Collaborative Filtering Algorithm,” Int. J. Comput. Appl., vol. 179, no. 46, hlm. 41–48, Jun 2018, doi: 10.5120/ijca2018917193.
-[2]	A. B. Kartiko, “Perancangan Sistem Rekomendasi Buku Pada Aplikasi Pembelajaran Elektronik (E- Learning) Berbasis Website Menggunakan Collaborative Filtering,” hlm. 14.
-[3]	A. H. Ritdrix dan P. W. Wirawan, “Sistem Rekomendasi Buku Menggunakan Metode Item-Based Collaborative Filtering,” J. Masy. Inform., vol. 9, no. 2, hlm. 24–32, Nov 2018, doi: 10.14710/jmasif.9.2.31482.
+1. E. Uko, B. O., dan P. O., “An Improved Online Book Recommender System using Collaborative Filtering Algorithm,” Int. J. Comput. Appl., vol. 179, no. 46, hlm. 41–48, Jun 2018, doi: 10.5120/ijca2018917193.
+2. A. B. Kartiko, “Perancangan Sistem Rekomendasi Buku Pada Aplikasi Pembelajaran Elektronik (E- Learning) Berbasis Website Menggunakan Collaborative Filtering,” hlm. 14.
+3. A. H. Ritdrix dan P. W. Wirawan, “Sistem Rekomendasi Buku Menggunakan Metode Item-Based Collaborative Filtering,” J. Masy. Inform., vol. 9, no. 2, hlm. 24–32, Nov 2018, doi: 10.14710/jmasif.9.2.31482.
 
